@@ -1,0 +1,23 @@
+{
+  "name": "njs-303b",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "ioredis": "^2.4.0",
+    "method-override": "^2.3.6",
+    "mongoose": "^4.6.7",
+    "mongoose-auto-increment": "^5.0.1",
+    "node-sass-middleware": "^0.9.8",
+    "pug": "^2.0.0-beta6",
+    "sqlite": "^2.2.0",
+    "uuid": "^3.0.0"
+  }
+}
