@@ -22,4 +22,11 @@
 
 # Install
 
+Download ... and open your terminal<br>
+ <br>
+ $ cd /...<br>
+ $ npm install<br>
+
+Open your favorite Browser at this link http://localhost:8080 <br>
+
 # Guide
