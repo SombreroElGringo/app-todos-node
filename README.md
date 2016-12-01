@@ -2,7 +2,10 @@
 
 # Description
 
-... is a Rest API develop with **Node.Js**.<br>
+App-todos-node is a Rest API develop with **Node.Js**.<br>
+You can post, edit, delete & complete your todos.<br>
+You can create a team and join it for teamwork,<br> 
+and affect some todos to your team mates<br>
 
 # Requirements
 
