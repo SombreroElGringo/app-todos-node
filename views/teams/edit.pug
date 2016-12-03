@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+    if (flash)
+        if(flash.errorList)
+            ul
+            - for (var i = 0; i < flash.errorList.length; i++){
+                li= flash.errorList[i]
+            - }
+        if(flash.successList)
+            ul
+            - for (var i = 0; i < flash.successList.length; i++){
+                li= flash.successList[i]
+            - }
+
+    center
+      p= message
+      main.mdl-layout__content
+          div.mdl-card.mdl-shadow--6dp
+            div.mdl-card__title.mdl-color--orange.mdl-color-text--white
+                h2.mdl-card__title-text= title
+            div.mdl-card__supporting-text
+              form(method="post" action= path)
+                div.mdl-textfield.mdl-js-textfield
+                  input#teamN.mdl-textfield__input(type='text', name="teamName", value=team.teamName)
+                  label.mdl-textfield__label(for='teamN') Team name
+                div.mdl-textfield.mdl-js-textfield
+                  input#description.mdl-textfield__input(type='text', name="description", value=team.description)
+                  label.mdl-textfield__label(for='description') Description
+                center
+                  button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(type="submit") Send
+                  button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect( onclick="window.history.back();") Back

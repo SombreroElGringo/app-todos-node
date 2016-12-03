@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+
+  center
+    h1= title
+
+    table
+      tr
+        td
+          // Wide card with share menu button
+          div.demo-card-wide.mdl-card.mdl-shadow--2dp
+            - var num = Math.floor(Math.random() * 4)+1
+
+            .mdl-card__title(style="background: url('/img/team-work-"+num+".jpg') center / cover;")
+              h2.mdl-card__title-text= team.teamName
+            .mdl-card__supporting-text
+              h3.mdl-card__title-text Admin:
+              each user in users
+                if (team.idAdmin == user.id)
+                  p=user.pseudonyme
+              h3.mdl-card__title-text Description:
+              p= team.description
+              h3.mdl-card__title-text Members:
+              p= team.nMembers
+              h3.mdl-card__title-text Created:
+              p #{prettyDate(team.createdAt)}
+            .mdl-card__actions.mdl-card--border
+              center
+                a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(href="/teams/" + team.id + "?_method=PUT")
+                  | Join or Leave
+                button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect( onclick="window.history.back();") Back
+            .mdl-card__menu
+              a.a-icon-buton(href="/teams")
+                button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect
+                  i.material-icons group
+              a.a-icon-buton(href="/teams/" + team.id + "/edit")
+                button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect
+                  i.material-icons mode_edit
+              a.a-icon-buton(href="/teams/" + team.id + '?_method=DELETE')
+                button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect
+                  i.material-icons delete
+
+    -function prettyDate(epoch) { var date = new Date(parseInt(epoch)); return date.toLocaleString();};
