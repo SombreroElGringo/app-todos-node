@@ -1,0 +1,53 @@
+doctype html
+html
+
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.grey-orange.min.css')
+    script(defer src='https://code.getmdl.io/1.2.1/material.min.js')
+
+  //__________________________________________________________________  Menu  ________________________________________________________
+  body#body
+    div.mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+      header.mdl-layout__header.mdl-layout__header--transparent
+        div.mdl-layout__header-row
+
+          div.mdl-layout-spacer
+          // Navigation
+          nav.mdl-navigation.mdl-layout--large-screen-only
+
+            // Auth Menu
+            button#menu-auth.mdl-button.mdl-js-button.mdl-button--icon
+              i.material-icons account_circle
+
+            div#auth.mdl-tooltip(for='menu-auth')
+              | Connection
+
+            ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='menu-auth')
+              if token == null
+                a(href="/sessions")
+                  li.mdl-menu__item Sign In
+                a(href="/users/add")
+                  li.mdl-menu__item Sign Up
+              else
+                a(href="/sessions/?_method=DELETE")
+                  li.mdl-menu__item Log Out
+
+      div.mdl-layout__drawer
+        span.mdl-layout-title Menu
+        nav.mdl-navigation
+          a.mdl-navigation__link(href='/') Home
+          a.mdl-navigation__link(href='/teams') Teams
+          a.mdl-navigation__link(href='/todos') Todos
+          a.mdl-navigation__link(href='/users') Users
+      main.mdl-layout__content
+
+        //__________________________________________________________________  Content  _______________________________________________
+        div.page-content
+
+          block content
+
+
+        script(type='text/javascript', src='/js/functions.js')
