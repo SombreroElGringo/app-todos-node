@@ -33,19 +33,13 @@ and affect some todos to your team mates!<br>
 
 # Install
 
-Download ... and open your terminal<br>
+Download app-todos-node and open your terminal<br>
  <br>
  $ cd ../app-todos-node<br>
  $ npm install<br>
  $ npm start<br>
 
 Open your favorite Browser at this link http://localhost:8080 <br>
-
-# Guide
-
-
-gif
-
 
 # License
 
