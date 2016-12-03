@@ -119,16 +119,16 @@ router.get('/add', Session.isAuthenticated, (req, res, next) => {
 	console.log('- Route => Add team (GET)')
     res.format({
         html: () => {
-            var sess = req.session
+            var sessionFlash = req.session.flash
+						req.session.flash = {}
             res.render('teams/edit', {
                 title: 'Adding a team',
                 path: '/teams',
                 team: {},
 								message: 'Warning: You can create only one team!',
-                flash: sess.flash,
+                flash: sessionFlash,
 								token: req.cookies.accessToken
             })
-            sess.flash = {}
         },
         json: () => {
             let err = new Error('Bad Request')
@@ -150,15 +150,15 @@ router.get('/:id(\\d+)/edit', Session.isAuthenticated, (req, res, next) => {
     res.format({
         html: () => {
             Team.get(req.params.id).then((result) => {
-                var sess = req.session
+                var sessionFlash = req.session.flash
+								req.session.flash = {}
                 res.render('teams/edit', {
                     title: 'Edit team n°' + result.id ,
                     path: '/teams/' + result.id + '?_method=PUT',
                     team: result,
-                    flash: sess.flash,
+                    flash: sessionFlash,
                     token: req.cookies.accessToken
                 })
-                sess.flash = {}
             }).catch(next)
         },
         json: () => {
