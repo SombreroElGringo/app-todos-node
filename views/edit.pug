@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+    if (flash)
+        if(flash.errorList)
+            ul
+            - for (var i = 0; i < flash.errorList.length; i++){
+                li= flash.errorList[i]
+            - }
+        if(flash.successList)
+            ul
+            - for (var i = 0; i < flash.successList.length; i++){
+                li= flash.successList[i]
+            - }
+
+    center
+      main.mdl-layout__content
+          div.mdl-card.mdl-shadow--6dp
+            div.mdl-card__title.mdl-color--orange.mdl-color-text--white
+                h2.mdl-card__title-text= title
+            div.mdl-card__supporting-text
+              form(method="post" action= path)
+                div
+                  select(name='recipientId')
+                    each user in users
+                      if todo.recipientId == user.id
+                        option(name='recipientId', value=user.id)=user.pseudonyme
+                    each user in users
+                      option(name='recipientId', value=user.id)=user.pseudonyme
+                div.mdl-textfield.mdl-js-textfield
+                  input#subject.mdl-textfield__input(type='text', name="subject", value=todo.subject)
+                  label.mdl-textfield__label(for='subject') Subject
+                div.mdl-textfield.mdl-js-textfield
+                  input#message.mdl-textfield__input(type='text', name="message", value=todo.message)
+                  label.mdl-textfield__label(for='message') Message
+                center
+                  button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(type="submit") Send
