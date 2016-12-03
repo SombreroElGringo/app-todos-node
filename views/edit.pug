@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+    if (flash)
+        if(flash.errorList)
+          center
+            ul
+            - for (var i = 0; i < flash.errorList.length; i++){
+                li= flash.errorList[i]
+            - }
+        if(flash.successList)
+         center
+            ul
+            - for (var i = 0; i < flash.successList.length; i++){
+                li= flash.successList[i]
+            - }
+
+    center
+      main.mdl-layout__content
+          div.mdl-card.mdl-shadow--6dp
+            div.mdl-card__title.mdl-color--orange.mdl-color-text--white
+                h2.mdl-card__title-text= title
+            div.mdl-card__supporting-text
+              form(method="post" action= path)
+                div.mdl-textfield.mdl-js-textfield
+                  input#pseudonyme.mdl-textfield__input(type='text', name="pseudonyme", value=user.pseudonyme)
+                  label.mdl-textfield__label(for='pseudonyme') Pseudo
+                div.mdl-textfield.mdl-js-textfield
+                  input#email.mdl-textfield__input(type='email', name="email", value=user.email)
+                  label.mdl-textfield__label(for='email') eMail
+                div.mdl-textfield.mdl-js-textfield
+                  input#firstname.mdl-textfield__input(type='text', name="firstname", value=user.firstname)
+                  label.mdl-textfield__label(for='firstname') Firstname
+                div.mdl-textfield.mdl-js-textfield
+                  input#lastname.mdl-textfield__input(type='text', name="lastname", value=user.lastname)
+                  label.mdl-textfield__label(for='lastname') Lastname
+                div.mdl-textfield.mdl-js-textfield
+                  input#userpass.mdl-textfield__input(type='password', name="password")
+                  label.mdl-textfield__label(for='userpass') Password
+                div.mdl-textfield.mdl-js-textfield
+                  input#userpass-conf.mdl-textfield__input(type='password', name="password_check")
+                  label.mdl-textfield__label(for='userpass-conf') Password confirmation
+                center
+                  button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(type="submit") Send
+                  button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect( onclick="window.history.back();") Back
