@@ -20,6 +20,8 @@ router.get('/', Session.isAuthenticated, (req, res, next) => {
 
     if (offset < 0) offset = 0
 
+    req.session.flash = {}
+
     Promise.all([
         User.getAll(limit, offset),
         User.count()
@@ -61,15 +63,15 @@ router.get('/:id(\\d+)/edit', Session.isAuthenticated, (req, res, next) => {
     res.format({
         html: () => {
             User.get(req.params.id).then((result) => {
-                var sess = req.session
+                var sessionFlash = req.session.flash
+                req.session.flash = {}
                 res.render('users/edit', {
                     title: 'Edit user n°' + result.id ,
                     path: '/users/' + result.id + '?_method=PUT',
                     user: result,
-                    flash: sess.flash,
+                    flash: sessionFlash,
                     token: req.cookies.accessToken
                 })
-                sess.flash = {}
             }).catch(next)
         },
         json: () => {
@@ -91,14 +93,14 @@ router.get('/add', (req, res, next) => {
 	console.log('- Route => Add user (GET)')
     res.format({
         html: () => {
-            var sess = req.session
+            var sessionFlash = req.session.flash
+            req.session.flash = {}
             res.render('users/edit', {
                 title: 'Adding a user',
                 path: '/users',
                 user: {},
-                flash: sess.flash
+                flash: sessionFlash
             })
-            sess.flash = {}
         },
         json: () => {
             let err = new Error('Bad Request')
