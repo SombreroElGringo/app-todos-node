@@ -1,0 +1,60 @@
+extends ../layout
+
+block content
+
+  center
+    h1= title
+    br
+    a.a-icon-buton(href="/teams/add")
+      button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect
+        i.material-icons add_circle
+
+
+    table
+        each team in teams
+
+          if team.id% 2 ==0
+            tr
+
+          td
+            // Wide card with share menu button
+            div.demo-card-wide.mdl-card.mdl-shadow--2dp
+              - var num = Math.floor(Math.random() * 4)+1
+
+              .mdl-card__title(style="background: url('/img/team-work-"+num+".jpg') center / cover;")
+                h2.mdl-card__title-text= team.teamName
+              .mdl-card__supporting-text
+                h3.mdl-card__title-text Description:
+                p= team.description
+                h3.mdl-card__title-text Members:
+                p= team.nMembers
+              .mdl-card__actions.mdl-card--border
+                center
+                  if user.teamId == team.id
+                    a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(href="/teams/" + team.id + "?_method=PUT")
+                      | Leave
+                  else
+                    a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(href="/teams/" + team.id + "?_method=PUT")
+                      | Join
+              .mdl-card__menu
+                a.a-icon-buton(href="/teams/" + team.id)
+                  button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect
+                      i.material-icons remove_red_eye
+                a.a-icon-buton(href="/teams/" + team.id + "/edit")
+                  button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect
+                    i.material-icons mode_edit
+                a.a-icon-buton(href="/teams/" + team.id + '?_method=DELETE')
+                  button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect
+                    i.material-icons delete
+
+          if team.id% 2 ==0
+            td
+              b &nbsp;&nbsp;&nbsp;&nbsp;
+
+
+    ul.pagination
+          - var nbPage = Math.ceil(count / limit)
+          - for (var i = 0; i < nbPage; i++){
+              li
+                  a(href='/teams?limit=' + limit + '?offset=' + offset + (i*limit)) Page #{i + 1}
+          - }
