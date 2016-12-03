@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  center
+    div#errors
+      h1= message
+      h2= error.status
+      pre #{error.stack}
+      p If the issues still persist, contact the administrator.
+      img(src='../img/error.gif', height='45%', width='45%')
