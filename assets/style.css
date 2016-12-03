@@ -1,0 +1,25 @@
+body {
+  background-image: url("../img/wallpaperWhite.png");
+  font: 1.2em Helvetica, "Lucida grande", Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.demo-card-wide.mdl-card {
+  width: 512px;
+}
+
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+}
+
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+
+.a-icon-button {
+  color: inherit;
+}
