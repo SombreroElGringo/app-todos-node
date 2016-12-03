@@ -133,16 +133,16 @@ router.get('/:id(\\d+)/edit', Session.isAuthenticated, (req, res, next) => {
             Todo.get(req.params.id),
 						User.getAll(1000,0)
 					]).then((result) => {
-                var sess = req.session
+                var sessionFlash = req.session.flash
+								req.session.flash = {}
                 res.render('todos/edit', {
                     title: "Edition of the todo n°" + result[0].id ,
                     path: "/todos/"+req.params.id+"/?_method=PUT",
                     todo: result[0],
 										users: result[1],
-                    flash: sess.flash,
+                    flash: sessionFlash,
                     token: req.cookies.accessToken
                 })
-                sess.flash = {}
             }).catch(next)
         },
         json: () => {
