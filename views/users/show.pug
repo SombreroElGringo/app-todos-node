@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+
+    center
+      main.mdl-layout__content
+          div.mdl-card.mdl-shadow--6dp
+            div.mdl-card__title.mdl-color--orange.mdl-color-text--white
+                h2.mdl-card__title-text= title
+            div.mdl-card__supporting-text
+              div.mdl-textfield.mdl-js-textfield
+                input#pseudonyme.mdl-textfield__input(type='text', name="pseudonyme", value=user.pseudonyme, readonly)
+              div.mdl-textfield.mdl-js-textfield
+                input#email.mdl-textfield__input(type='email', name="email", value=user.email, readonly)
+              div.mdl-textfield.mdl-js-textfield
+                input#firstname.mdl-textfield__input(type='text', name="firstname", value=user.firstname, readonly)
+              div.mdl-textfield.mdl-js-textfield
+                input#lastname.mdl-textfield__input(type='text', name="lastname", value=user.lastname, readonly)
+              center
+                button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect( onclick="window.history.back();") Back

@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+
+  center
+    h1= title
+
+    table.mdl-data-table.mdl-js-data-table.mdl-data-table.mdl-shadow--2dp
+      thead
+        tr
+            th.mdl-data-table__cell--non-numeric Id
+            th.mdl-data-table__cell--non-numeric Pseudonyme
+            th.mdl-data-table__cell--non-numeric Email
+            th.mdl-data-table__cell--non-numeric Prénom
+            th.mdl-data-table__cell--non-numeric Nom
+            th.mdl-data-table__cell--non-numeric Actions
+
+        each user in users
+            tr
+                td= user.id
+                td= user.pseudonyme
+                td= user.email
+                td= user.firstname
+                td= user.lastname
+                td
+                    ul
+                        li
+                            a(href="/users/" + user.id) Voir
+                        li
+                            a(href="/users/" + user.id + '/edit') Éditer
+                        li
+                            a(href="/users/" + user.id + '?_method=DELETE') Supprimer
+
+    ul.pagination
+        - var nbPage = Math.ceil(count / limit)
+        - for (var i = 0; i < nbPage; i++){
+            li
+                a(href='/users?limit=' + limit + '?offset=' + offset + (i*limit)) Page #{i + 1}
+        - }
