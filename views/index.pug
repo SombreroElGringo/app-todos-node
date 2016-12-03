@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+    if (errorList)
+        ul
+            each msg in errorList
+                li= msg
+
+    center
+      main.mdl-layout__content
+          div.mdl-card.mdl-shadow--6dp
+            div.mdl-card__title.mdl-color--orange.mdl-color-text--white
+                h2.mdl-card__title-text Sign In
+            div.mdl-card__supporting-text
+              form(method="post" action= "/sessions")
+                div.mdl-textfield.mdl-js-textfield
+                  input#pseudonyme.mdl-textfield__input(type='text', name="pseudonyme")
+                  label.mdl-textfield__label(for='pseudonyme') Pseudo
+                div.mdl-textfield.mdl-js-textfield
+                  input#userpass.mdl-textfield__input(type='password', name="password")
+                  label.mdl-textfield__label(for='userpass') Password
+                center
+                  button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(type="submit") Log in
