@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+
+
+  center
+      main.mdl-layout__content
+          div.mdl-card.mdl-shadow--6dp
+            div.mdl-card__title.mdl-color--orange.mdl-color-text--white
+                h2.mdl-card__title-text= title
+            div.mdl-card__supporting-text
+              each user in users
+                if (todo.authorId == user.id)
+                  div.mdl-textfield.mdl-js-textfield
+                    input#pseudonyme.mdl-textfield__input(type='text', name="authorId", value="From "+user.pseudonyme, readonly)
+              if(todo.teamId!=null)
+                each user in users
+                  if (todo.recipientId == user.id)
+                    div.mdl-textfield.mdl-js-textfield
+                      input#recipient.mdl-textfield__input(type='text', name="recipientId", value="To "+user.pseudonyme, readonly)
+              div.mdl-textfield.mdl-js-textfield
+                input#subject.mdl-textfield__input(type='text', name="subject", value="Subject: "+todo.subject, readonly)
+              div.mdl-textfield.mdl-js-textfield
+                input#message.mdl-textfield__input(type='text', name="message", value="Message: "+todo.message, readonly)
+              div.mdl-textfield.mdl-js-textfield
+                input#createdAt.mdl-textfield__input(type='text', name="createdAt", value="Created at "+prettyDate(todo.createdAt), readonly)
+              center
+                button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect( onclick="window.history.back();") Back
+
+  -function prettyDate(epoch) { var date = new Date(parseInt(epoch)); return date.toLocaleString();};
