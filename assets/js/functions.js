@@ -19,10 +19,3 @@ function toggleUserTeamTodos() {
         bx.disabled = false;
     }
 }
-
-
-function changeColor(color) {
-
-  var elt = document.getElementById("body");
-	elt.background = "../img/wallpaper"+color+".png";
-}
