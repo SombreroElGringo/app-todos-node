@@ -119,79 +119,80 @@ block content
               th.mdl-data-table__cell--non-numeric completedAt
 
           each teamTodo in teamTodos
-            form(method="post" action="/todos/"+teamTodo.id+"/?_method=PUT")
-              if teamTodo.subject == 'Subject' && teamTodo.message == 'My text...'
-                tr
-                    td
-                      if teamTodo.completedAt == 'null' || teamTodo.completedAt == null
-                        input(type='checkbox', name='check', onclick='window.location.assign("/todos/'+teamTodo.id+'/checked/'+teamTodo.completedAt+'/?_method=PUT")')
+            if teamTodo.teamId != null
+              form(method="post" action="/todos/"+teamTodo.id+"/?_method=PUT")
+                if teamTodo.subject == 'Subject' && teamTodo.message == 'My text...'
+                  tr
+                      td
+                        if teamTodo.completedAt == 'null' || teamTodo.completedAt == null
+                          input(type='checkbox', name='check', onclick='window.location.assign("/todos/'+teamTodo.id+'/checked/'+teamTodo.completedAt+'/?_method=PUT")')
+                        else
+                          input(type='checkbox', name='check', onclick='window.location.assign("/todos/'+teamTodo.id+'/checked/'+teamTodo.completedAt+'/?_method=PUT")', checked='')
+                      td= teamTodo.id
+                      each user in users
+                        if (teamTodo.authorId == user.id)
+                          td=user.pseudonyme
+                      td
+                        select(name='recipientId')
+                          each user in users
+                            option(name='recipientId', value=user.id)=user.pseudonyme
+                      td= teamTodo.teamId
+                      td
+                        input(type='text', name='subject', value= teamTodo.subject)
+                      td
+                        input(type='text', name='message', value= teamTodo.message)
+                      td #{prettyDate(teamTodo.createdAt)}
+                      if !teamTodo.updatedAt
+                        td Null
                       else
-                        input(type='checkbox', name='check', onclick='window.location.assign("/todos/'+teamTodo.id+'/checked/'+teamTodo.completedAt+'/?_method=PUT")', checked='')
-                    td= teamTodo.id
-                    each user in users
-                      if (teamTodo.authorId == user.id)
-                        td=user.pseudonyme
-                    td
-                      select(name='recipientId')
-                        each user in users
-                          option(name='recipientId', value=user.id)=user.pseudonyme
-                    td= teamTodo.teamId
-                    td
-                      input(type='text', name='subject', value= teamTodo.subject)
-                    td
-                      input(type='text', name='message', value= teamTodo.message)
-                    td #{prettyDate(teamTodo.createdAt)}
-                    if !teamTodo.updatedAt
-                      td Null
-                    else
-                      td #{prettyDate(teamTodo.updatedAt)}
-                    if !teamTodo.completedAt
-                      td Null
-                    else
-                      td #{prettyDate(teamTodo.completedAt)}
-                    td
-                      ul
-                          li
-                              a(href="/todos/" + teamTodo.id) Voir
-                          li
-                              input(type="submit", value='Editer')
-                          li
-                              a(href="/todos/" + teamTodo.id + '?_method=DELETE') Supprimer
+                        td #{prettyDate(teamTodo.updatedAt)}
+                      if !teamTodo.completedAt
+                        td Null
+                      else
+                        td #{prettyDate(teamTodo.completedAt)}
+                      td
+                        ul
+                            li
+                                a(href="/todos/" + teamTodo.id) Voir
+                            li
+                                input(type="submit", value='Editer')
+                            li
+                                a(href="/todos/" + teamTodo.id + '?_method=DELETE') Supprimer
 
-              else
-                tr
-                    td
-                      if teamTodo.completedAt == 'null' || teamTodo.completedAt == null
-                        input(type='checkbox', name='check', onclick='window.location.assign("/todos/'+teamTodo.id+'/checked/'+teamTodo.completedAt+'/?_method=PUT")')
+                else
+                  tr
+                      td
+                        if teamTodo.completedAt == 'null' || teamTodo.completedAt == null
+                          input(type='checkbox', name='check', onclick='window.location.assign("/todos/'+teamTodo.id+'/checked/'+teamTodo.completedAt+'/?_method=PUT")')
+                        else
+                          input(type='checkbox', name='check', onclick='window.location.assign("/todos/'+teamTodo.id+'/checked/'+teamTodo.completedAt+'/?_method=PUT")', checked='')
+                      td= teamTodo.id
+                      each user in users
+                        if (teamTodo.authorId == user.id)
+                          td=user.pseudonyme
+                      each user in users
+                        if (teamTodo.recipientId == user.id)
+                          td=user.pseudonyme
+                      td= teamTodo.teamId
+                      td= teamTodo.subject
+                      td= teamTodo.message
+                      td #{prettyDate(teamTodo.createdAt)}
+                      if !teamTodo.updatedAt
+                        td Null
                       else
-                        input(type='checkbox', name='check', onclick='window.location.assign("/todos/'+teamTodo.id+'/checked/'+teamTodo.completedAt+'/?_method=PUT")', checked='')
-                    td= teamTodo.id
-                    each user in users
-                      if (teamTodo.authorId == user.id)
-                        td=user.pseudonyme
-                    each user in users
-                      if (teamTodo.recipientId == user.id)
-                        td=user.pseudonyme
-                    td= teamTodo.teamId
-                    td= teamTodo.subject
-                    td= teamTodo.message
-                    td #{prettyDate(teamTodo.createdAt)}
-                    if !teamTodo.updatedAt
-                      td Null
-                    else
-                      td #{prettyDate(teamTodo.updatedAt)}
-                    if !teamTodo.completedAt
-                      td Null
-                    else
-                      td #{prettyDate(teamTodo.completedAt)}
-                    td
-                      ul
-                          li
-                              a(href="/todos/" + teamTodo.id) Voir
-                          li
-                              a(href="/todos/" + teamTodo.id + '/edit') Éditer
-                          li
-                              a(href="/todos/" + teamTodo.id + '?_method=DELETE') Supprimer
+                        td #{prettyDate(teamTodo.updatedAt)}
+                      if !teamTodo.completedAt
+                        td Null
+                      else
+                        td #{prettyDate(teamTodo.completedAt)}
+                      td
+                        ul
+                            li
+                                a(href="/todos/" + teamTodo.id) Voir
+                            li
+                                a(href="/todos/" + teamTodo.id + '/edit') Éditer
+                            li
+                                a(href="/todos/" + teamTodo.id + '?_method=DELETE') Supprimer
 
 
 
