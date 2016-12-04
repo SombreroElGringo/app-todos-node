@@ -101,7 +101,7 @@ app.use(function(err, req, res, next) {
 })
 
 //Mongoose connexion
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/app_todos_db');
 mongoose.Promise = global.Promise;
 
 var db = mongoose.connection;
