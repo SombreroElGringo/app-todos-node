@@ -1,0 +1,41 @@
+version: '3'
+services:
+  db-mongo:
+    image: mvertes/alpine-mongo:latest
+    networks:
+      - back-tier
+    volumes:
+      - db-data:/data/db
+  backend:
+    build:  .
+    volumes:
+      - .:/app
+      - dependencies:/app/node_modules
+    links:
+      - db-mongo
+    environment:
+      - NODE_ENV=developement
+      - MONGO_HOST=db-mongo
+    networks:
+      - front-tier
+      - back-tier
+  load-balancer:
+    image: dockercloud/haproxy:latest
+    ports:
+      - "3003:80"
+    depends_on:
+      - backend
+    links:
+      - backend
+    networks:
+      - front-tier
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+    driver: bridge
+volumes:
+  dependencies:
+  db-data:
