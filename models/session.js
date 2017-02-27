@@ -1,5 +1,5 @@
 const ioRedis = require('ioredis')
-const redis = new ioRedis()
+const redis = new ioRedis({host: process.env.REDIS_HOST || 'localhost'})
 
 /**
  * That module export allows to manage the sessions's data in redis
